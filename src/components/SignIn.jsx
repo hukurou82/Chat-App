@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-function Copyright() {
+const Copyright = () => {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
@@ -22,7 +22,7 @@ function Copyright() {
       </Link>
     </Typography>
   );
-}
+};
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,6 +46,15 @@ const useStyles = makeStyles((theme) => ({
 const SignIn = ({ setName }) => {
   const classes = useStyles();
 
+  const [disabled, setDisabled] = useState(true);
+  const [string, setString] = useState("");
+  console.log({ disabled, string });
+
+  useEffect(() => {
+    const disabled = string === "";
+    setDisabled(disabled);
+  }, [string]);
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -63,6 +72,9 @@ const SignIn = ({ setName }) => {
             label="お名前"
             name="name"
             autoFocus
+            onChange={(e) => {
+              setString(e.target.value);
+            }}
           />
           <Button
             type="submit"
@@ -70,6 +82,7 @@ const SignIn = ({ setName }) => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={disabled}
           >
             入室
           </Button>
