@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-const SignIn = () => {
+const SignIn = ({ setName }) => {
   const classes = useStyles();
 
   return (
