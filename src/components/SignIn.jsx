@@ -75,6 +75,12 @@ const SignIn = ({ setName }) => {
             onChange={(e) => {
               setString(e.target.value);
             }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setName(e.target.value);
+                e.preventDefault();
+              }
+            }}
           />
           <Button
             type="button"
