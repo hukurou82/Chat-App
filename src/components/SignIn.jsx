@@ -45,10 +45,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 const SignIn = ({ setName }) => {
   const classes = useStyles();
-
   const [disabled, setDisabled] = useState(true);
   const [string, setString] = useState("");
-  console.log({ disabled, string });
+  const [isConposed, setIsConposed] = useState(false);
 
   useEffect(() => {
     const disabled = string === "";
@@ -76,10 +75,18 @@ const SignIn = ({ setName }) => {
               setString(e.target.value);
             }}
             onKeyDown={(e) => {
+              if (isConposed) return;
+
               if (e.key === "Enter") {
                 setName(e.target.value);
                 e.preventDefault();
               }
+            }}
+            onCompositionStart={() => {
+              setIsConposed(true);
+            }}
+            onCompositionEnd={() => {
+              setIsConposed(false);
             }}
           />
           <Button
