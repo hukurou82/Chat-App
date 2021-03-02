@@ -47,7 +47,7 @@ const SignIn = ({ setName }) => {
   const classes = useStyles();
   const [disabled, setDisabled] = useState(true);
   const [string, setString] = useState("");
-  const [isConposed, setIsConposed] = useState(false);
+  const [isComposed, setIsComposed] = useState(false);
 
   useEffect(() => {
     const disabled = string === "";
@@ -75,7 +75,7 @@ const SignIn = ({ setName }) => {
               setString(e.target.value);
             }}
             onKeyDown={(e) => {
-              if (isConposed) return;
+              if (isComposed) return;
 
               if (e.key === "Enter") {
                 setName(e.target.value);
@@ -83,10 +83,10 @@ const SignIn = ({ setName }) => {
               }
             }}
             onCompositionStart={() => {
-              setIsConposed(true);
+              setIsComposed(true);
             }}
             onCompositionEnd={() => {
-              setIsConposed(false);
+              setIsComposed(false);
             }}
           />
           <Button
